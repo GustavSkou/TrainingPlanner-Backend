@@ -38,7 +38,7 @@ namespace TrainingPlanner.Application.Services
             };
 
             await _userRepository.AddAsync(user);
-            
+
             return user;
         }
 
@@ -61,6 +61,21 @@ namespace TrainingPlanner.Application.Services
         private async Task<bool> DoesUserExists(UserDTO dto)
         {
             return await _userRepository.DoesEmailExists(dto.Email);
+        }
+
+        public Task<IEnumerable<User>> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> GetUserById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> GetUserByEmail(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }
