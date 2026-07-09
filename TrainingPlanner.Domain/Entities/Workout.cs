@@ -7,9 +7,8 @@ public class Workout
     public int TrainingPlanId { get; set; }
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
-    public DateTime WorkoutDate { get; set; }
     public int DurationMinutes { get; set; }
-    public int? CaloriesBurned { get; set; }
+    public int DistanceMeters { get; set; }
     public string? Notes { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
@@ -17,4 +16,6 @@ public class Workout
     // Navigation properties
     public User User { get; set; } = null!;
     public TrainingPlan TrainingPlan { get; set; } = null!;
+    // Structured workout plan: segments containing intervals (e.g. 5x1km)
+    public ICollection<WorkoutSegment> Segments { get; set; } = new List<WorkoutSegment>();
 }

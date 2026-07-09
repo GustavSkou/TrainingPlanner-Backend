@@ -1,3 +1,5 @@
+using System;
+
 namespace TrainingPlanner.Application.DTOs
 {
     public class TrainingPlanDTO

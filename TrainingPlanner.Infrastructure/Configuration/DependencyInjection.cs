@@ -21,6 +21,8 @@ namespace TrainingPlanner.Infrastructure.Configuration
 
             services.AddScoped<ITrainingPlanRepository, TrainingPlanRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITrainingTypeRepository, TrainingTypeRepository>();
+            services.AddScoped<IWorkoutRepository, WorkoutRepository>();
 
             return services;
         }

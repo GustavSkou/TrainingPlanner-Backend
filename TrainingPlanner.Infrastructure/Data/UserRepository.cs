@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TrainingPlanner.Domain.Entities;
 using TrainingPlanner.Infrastructure.Contracts;
@@ -30,14 +32,14 @@ namespace TrainingPlanner.Infrastructure.Data
             .AnyAsync(u => u.Email.ToLower() == email.ToLower());
         }
 
-        public async Task<User> GetUsersById(int id)
+        public async Task<User> GetUserById(int id)
         {
             return await _context.Users.FirstAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetUsersById(IEnumerable<int> ids)
         {
-            if(ids.Count() <= 0) 
+            if (ids == null || !ids.Any())
                 return new List<User>();
 
             return await _context.Users

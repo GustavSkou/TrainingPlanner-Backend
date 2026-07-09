@@ -14,6 +14,8 @@ internal class ApplicationDbContext : DbContext
     public DbSet<TrainingType> TrainingTypes { get; set; }
     public DbSet<TrainingPlan> TrainingPlans { get; set; }
     public DbSet<Workout> Workouts { get; set; }
+    public DbSet<WorkoutSegment> WorkoutSegments { get; set; }
+    public DbSet<WorkoutInterval> WorkoutIntervals { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -71,6 +73,31 @@ internal class ApplicationDbContext : DbContext
             entity.HasOne(e => e.TrainingPlan)
                 .WithMany(tp => tp.Workouts)
                 .HasForeignKey(e => e.TrainingPlanId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // WorkoutSegment configuration
+        modelBuilder.Entity<WorkoutSegment>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Notes).HasMaxLength(1000);
+
+            entity.HasOne(e => e.Workout)
+                .WithMany(w => w.Segments)
+                .HasForeignKey(e => e.WorkoutId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // WorkoutInterval configuration
+        modelBuilder.Entity<WorkoutInterval>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Notes).HasMaxLength(1000);
+
+            entity.HasOne(e => e.Segment)
+                .WithMany(s => s.Intervals)
+                .HasForeignKey(e => e.SegmentId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
     }
