@@ -7,6 +7,6 @@ namespace TrainingPlanner.Application.Contracts
     {
         public Task<TrainingPlan> GetPlanById(int id);
         public Task<IEnumerable<TrainingPlan>> GetPlansByUserId(int userId);
-        public Task<bool> CreateTrainingPlan(TrainingPlanDTO dto);
+        public Task<TrainingPlan> CreateTrainingPlan(TrainingPlanDTO dto);
     }
 }

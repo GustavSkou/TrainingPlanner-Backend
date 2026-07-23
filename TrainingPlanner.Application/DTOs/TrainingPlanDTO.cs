@@ -4,7 +4,7 @@ namespace TrainingPlanner.Application.DTOs
 {
     public class TrainingPlanDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int UserId { get; set; }
         public int TrainingTypeId { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -12,5 +12,7 @@ namespace TrainingPlanner.Application.DTOs
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public bool IsActive { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

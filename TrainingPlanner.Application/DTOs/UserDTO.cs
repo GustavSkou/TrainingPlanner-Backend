@@ -2,14 +2,17 @@ namespace TrainingPlanner.Application.DTOs
 {
     public class UserDTO
     {
+        public int? Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public override string ToString()
         {
-            return $"{nameof(GetType)}\n{FirstName}\n{LastName}\n{Email}\n{Password}";
+            return $"{nameof(GetType)}\n{Id}\n{FirstName}\n{LastName}\n{Email}\n{CreatedAt}\n{UpdatedAt}";
         }
     }
 }

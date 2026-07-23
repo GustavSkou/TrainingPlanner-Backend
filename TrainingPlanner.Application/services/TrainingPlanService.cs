@@ -17,9 +17,27 @@ namespace TrainingPlanner.Application.Services
             _trainingPlanRepository = trainingPlanRepository;
         }
 
-        public Task<bool> CreateTrainingPlan(TrainingPlanDTO dto)
+        public async Task<TrainingPlan> CreateTrainingPlan(TrainingPlanDTO dto)
         {
-            throw new NotImplementedException();
+            TrainingPlan plan = new TrainingPlan
+            {
+                UserId = dto.UserId,
+                TrainingTypeId = dto.TrainingTypeId,
+                Name = dto.Name,
+                Description = dto.Description,
+                StartDate = dto.StartDate,
+                EndDate = dto.EndDate,
+                IsActive = dto.IsActive,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = null
+            };
+
+            return await _trainingPlanRepository.AddAsync(plan);
+            /* 
+                The passed "plan" object itself, is modifed to represent the entity after being saved to the db.
+                So the plan variable could just be return, reather than return the method result, which is the same object.
+                BUT, maybe this is a more logical solution 
+            */
         }
 
         public async Task<TrainingPlan> GetPlanById(int id)

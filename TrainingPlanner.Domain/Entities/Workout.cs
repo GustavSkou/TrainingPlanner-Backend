@@ -17,5 +17,5 @@ public class Workout
     public User User { get; set; } = null!;
     public TrainingPlan TrainingPlan { get; set; } = null!;
     // Structured workout plan: segments containing intervals (e.g. 5x1km)
-    public ICollection<WorkoutSegment> Segments { get; set; } = new List<WorkoutSegment>();
+    public ICollection<Segment> Segments { get; set; } = new List<Segment>();
 }

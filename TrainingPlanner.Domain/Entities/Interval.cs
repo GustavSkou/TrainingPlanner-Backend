@@ -1,6 +1,6 @@
 namespace TrainingPlanner.Domain.Entities;
 
-public class WorkoutInterval
+public class Interval
 {
     public int Id { get; set; }
     public int SegmentId { get; set; }
@@ -15,5 +15,5 @@ public class WorkoutInterval
     public string? Notes { get; set; }
 
     // Navigation
-    public WorkoutSegment Segment { get; set; } = null!;
+    public Segment Segment { get; set; } = null!;
 }
