@@ -22,6 +22,7 @@ public partial class Program
 
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<ITrainingTypeService, TrainingTypeService>();
 
         var app = builder.Build();
         app.Urls.Add("http://localhost:5001");

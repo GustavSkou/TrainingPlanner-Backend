@@ -4,4 +4,4 @@ dotnet ef migrations add <migration_name> --project .\TrainingPlanner.Infrastruc
 dotnet ef database update `
   --project .\TrainingPlanner.Infrastructure\TrainingPlanner.Infrastructure.csproj `
   --startup-project .\TrainingPlanner.API\TrainingPlanner.API.csproj `
-  --connection "<connection_string>"
+  --connection "Host=localhost;Port=5432;Database=TrainingPlannerDb;Username=postgres;Password=TrainingPlannerDb"

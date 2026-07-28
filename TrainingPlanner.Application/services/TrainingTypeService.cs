@@ -16,14 +16,14 @@ namespace TrainingPlanner.Application.Services
             _trainingTypeRepository = trainingTypeRepository;
         }
 
-        public Task<TrainingType> GetTypeById(int id)
+        public async Task<TrainingType> GetTypeById(int id)
         {
-            throw new NotImplementedException();
+            return await _trainingTypeRepository.GetByIdAsync(id);
         }
 
-        public Task<IEnumerable<TrainingType>> GetTypes()
+        public async Task<IEnumerable<TrainingType>> GetTypes()
         {
-            throw new NotImplementedException();
+            return await _trainingTypeRepository.GetAllAsync();
         }
     }
 }

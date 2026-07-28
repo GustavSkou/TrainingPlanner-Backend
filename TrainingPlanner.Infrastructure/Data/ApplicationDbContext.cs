@@ -37,6 +37,32 @@ internal class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(500);
+
+            entity.HasData(
+                new TrainingType
+                {
+                    Id = 1,
+                    Name = "Running",
+                    CreatedAt = DateTime.Today.ToUniversalTime()
+                },
+                new TrainingType
+                {
+                    Id = 2,
+                    Name = "Cycling",
+                    CreatedAt = DateTime.Today.ToUniversalTime()
+                },
+                new TrainingType
+                {
+                    Id = 3,
+                    Name = "Swimming",
+                    CreatedAt = DateTime.Today.ToUniversalTime()
+                },
+                new TrainingType
+                {
+                    Id = 4,
+                    Name = "Workout",
+                    CreatedAt = DateTime.Today.ToUniversalTime()
+                });
         });
 
         // TrainingPlan configuration
