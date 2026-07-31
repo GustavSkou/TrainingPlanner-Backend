@@ -19,10 +19,14 @@ public partial class Program
         //    options.UseNpgsql(connectionString));
         
         builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(options => {
+            options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        });
 
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<ITrainingTypeService, TrainingTypeService>();
+        builder.Services.AddScoped<ITrainingPlanService, TrainingPlanService>();
 
         var app = builder.Build();
         app.Urls.Add("http://localhost:5001");

@@ -11,24 +11,28 @@ namespace TrainingPlanner.Application.Services
     public class TrainingPlanService : ITrainingPlanService
     {
         private readonly ITrainingPlanRepository _trainingPlanRepository;
+        private readonly ITrainingTypeService _trainingTypeService;
 
-        public TrainingPlanService(ITrainingPlanRepository trainingPlanRepository)
+        public TrainingPlanService(ITrainingPlanRepository trainingPlanRepository, ITrainingTypeService trainingTypeService)
         {
             _trainingPlanRepository = trainingPlanRepository;
+            _trainingTypeService = trainingTypeService;
         }
 
         public async Task<TrainingPlan> CreateTrainingPlan(TrainingPlanDTO dto)
         {
+            if (!await IsTrainingPlanValid(dto)) {
+                throw new ArgumentException("Invalid training plan data.");
+            }
+
             TrainingPlan plan = new TrainingPlan
             {
                 UserId = dto.UserId,
                 TrainingTypeId = dto.TrainingTypeId,
                 Name = dto.Name,
                 Description = dto.Description,
-                StartDate = dto.StartDate,
-                EndDate = dto.EndDate,
-                IsActive = dto.IsActive,
-                CreatedAt = DateTime.Now,
+                Date = dto.Date.ToUniversalTime(),
+                CreatedAt = DateTime.Now.ToUniversalTime(),
                 UpdatedAt = null
             };
 
@@ -50,8 +54,13 @@ namespace TrainingPlanner.Application.Services
             return await _trainingPlanRepository.GetByUserIdAsync(userId);            
         }
 
-        private bool IsTrainingPlanValid(TrainingPlanDTO dto) {
-            throw new NotImplementedException();
+        private async Task<bool> IsTrainingPlanValid(TrainingPlanDTO dto)
+        {
+            return dto != null &&
+                   dto.UserId > 0 &&
+                   dto.TrainingTypeId > 0 &&
+                   //dto.TrainingTypeId <= (await _trainingTypeService.GetTypes()).Count() &&
+                   dto.Date != default;
         }
     }
 }

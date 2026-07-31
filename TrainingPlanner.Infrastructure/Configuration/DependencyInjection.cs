@@ -19,6 +19,8 @@ namespace TrainingPlanner.Infrastructure.Configuration
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
+            
+
             services.AddScoped<ITrainingPlanRepository, TrainingPlanRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITrainingTypeRepository, TrainingTypeRepository>();

@@ -1,0 +1,19 @@
+info:
+  name: Get TrainingPlan by user id
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: http://localhost:5001/plans/user?id=1
+  params:
+    - name: id
+      value: "1"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
