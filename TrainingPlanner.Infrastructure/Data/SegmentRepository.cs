@@ -1,5 +1,5 @@
 using TrainingPlanner.Domain.Entities;
-using TrainingPlanner.Infrastructure.Contracts;
+using TrainingPlanner.Domain.Contracts;
 
 namespace TrainingPlanner.Infrastructure.Data
 {

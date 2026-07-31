@@ -1,6 +1,6 @@
 using TrainingPlanner.Domain.Entities;
 
-namespace TrainingPlanner.Infrastructure.Contracts
+namespace TrainingPlanner.Domain.Contracts
 {
     public interface IIntervalRepository
     {

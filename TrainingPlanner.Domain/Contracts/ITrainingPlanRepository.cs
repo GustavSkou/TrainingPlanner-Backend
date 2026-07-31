@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrainingPlanner.Domain.Entities;
 
-namespace TrainingPlanner.Infrastructure.Contracts
+namespace TrainingPlanner.Domain.Contracts
 {
     public interface ITrainingPlanRepository
     {

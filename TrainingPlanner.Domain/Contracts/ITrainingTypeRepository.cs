@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TrainingPlanner.Domain.Entities;
 
-namespace TrainingPlanner.Infrastructure.Contracts
+namespace TrainingPlanner.Domain.Contracts
 {
     public interface ITrainingTypeRepository
     {
