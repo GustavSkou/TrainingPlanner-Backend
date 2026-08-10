@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TrainingPlanner.Application.Contracts;
 using TrainingPlanner.Application.Services;
 using TrainingPlanner.Infrastructure.Configuration;
+using TrainingPlanner.Infrastructure.Data;
 
 public partial class Program
 {
@@ -13,10 +16,12 @@ public partial class Program
             options.AddDefaultPolicy(p =>
                 p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
-        //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        //Console.WriteLine("connection string:" + connectionString);
-        //builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        //    options.UseNpgsql(connectionString));
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(connectionString));
+
+        Console.WriteLine("connection string:" + connectionString);
+        Console.WriteLine("API-KEY:" + builder.Configuration["API-KEY"]);
         
         builder.Services.AddControllers();
         builder.Services.AddControllers().AddJsonOptions(options => {
@@ -33,6 +38,22 @@ public partial class Program
         app.UseCors();
         app.MapControllers();
 
+        app.Use(async (httpContext, next) =>
+        {
+            if (!httpContext.Request.Headers.TryGetValue("API-KEY", out var apiKey)) {
+                httpContext.Response.StatusCode = 401;
+                await httpContext.Response.WriteAsync("Missing API-KEY");
+                return; 
+            }
+
+            if (!app.Configuration["API-KEY"].Equals(apiKey)) {
+                httpContext.Response.StatusCode = 401;
+                await httpContext.Response.WriteAsync("invalid API-KEY");
+                return;
+            }
+
+            await next(httpContext);   
+        });
         app.Run();
     }
 }
