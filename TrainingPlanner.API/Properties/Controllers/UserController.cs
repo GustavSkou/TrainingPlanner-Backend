@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TrainingPlanner.Domain.Entities;
 using TrainingPlanner.Application.Contracts;
 using TrainingPlanner.Application.DTOs;
@@ -6,6 +7,7 @@ using TrainingPlanner.Application.DTOs;
 namespace TrainingPlanner.API
 {
     [ApiController]
+    [Authorize]
     [Route("users")]
     public class UserController : ControllerBase
     {

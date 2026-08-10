@@ -10,6 +10,7 @@ namespace TrainingPlanner.Domain.Contracts
     {
         Task<User> AddAsync(User user);
         Task<bool> DoesEmailExists(string mail);
+        Task<User?> GetUserByEmail(string email);
         Task<User> GetUserById(int id);
         Task<IEnumerable<User>> GetUsersById(IEnumerable<int> ids);
     }

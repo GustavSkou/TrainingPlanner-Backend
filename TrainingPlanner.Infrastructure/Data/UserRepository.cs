@@ -32,6 +32,11 @@ namespace TrainingPlanner.Infrastructure.Data
             .AnyAsync(u => u.Email.ToLower() == email.ToLower());
         }
 
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
+        }
+
         public async Task<User> GetUserById(int id)
         {
             return await _context.Users.FirstAsync(u => u.Id == id);

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using TrainingPlanner.Infrastructure.Data;
-using TrainingPlanner.Infrastructure.Contracts;
+using TrainingPlanner.Domain.Contracts;
 
 namespace TrainingPlanner.Infrastructure.Configuration
 {
