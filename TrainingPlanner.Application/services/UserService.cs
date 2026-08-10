@@ -1,6 +1,6 @@
 using TrainingPlanner.Domain.Entities;
 using TrainingPlanner.Application.DTOs;
-using TrainingPlanner.Infrastructure.Contracts;
+using TrainingPlanner.Domain.Contracts;
 
 using Microsoft.AspNetCore.Identity;
 using TrainingPlanner.Application.Contracts;
