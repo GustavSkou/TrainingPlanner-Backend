@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TrainingPlanner.Application.Contracts;
 using TrainingPlanner.Domain.Entities;
-using TrainingPlanner.Infrastructure.Contracts;
+using TrainingPlanner.Domain.Contracts;
 
 namespace TrainingPlanner.Application.Services
 {
