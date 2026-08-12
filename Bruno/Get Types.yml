@@ -6,6 +6,9 @@ info:
 http:
   method: GET
   url: http://localhost:5001/types
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
   auth: inherit
 
 settings:

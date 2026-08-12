@@ -6,6 +6,9 @@ info:
 http:
   method: POST
   url: http://localhost:5001/users
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
   body:
     type: json
     data: |-

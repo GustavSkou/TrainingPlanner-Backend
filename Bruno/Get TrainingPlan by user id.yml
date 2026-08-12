@@ -6,6 +6,9 @@ info:
 http:
   method: GET
   url: http://localhost:5001/plans/user?id=1
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
   params:
     - name: id
       value: "1"

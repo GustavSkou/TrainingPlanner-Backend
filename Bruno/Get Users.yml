@@ -7,9 +7,8 @@ http:
   method: GET
   url: http://localhost:5001/users?ids=1
   headers:
-    - name: "1"
-      value: ""
-      disabled: true
+    - name: API-KEY
+      value: "{{API-KEY}}"
   params:
     - name: ids
       value: "1"
