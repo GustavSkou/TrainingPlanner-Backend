@@ -22,7 +22,7 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Build API
-        run: dotnet build TrainingPlanner.API/TrainingPlanner.API.csproj -c Release
+        run: dotnet build Release
 
       - name: Publish API
         run: dotnet publish TrainingPlanner.API/TrainingPlanner.API.csproj -c Release -o "${{ github.workspace }}/publish"
