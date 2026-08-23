@@ -34,26 +34,31 @@ public partial class Program
         builder.Services.AddScoped<ITrainingPlanService, TrainingPlanService>();
 
         var app = builder.Build();
-        app.Urls.Add("http://localhost:5001");
+        //app.Urls.Add("http://localhost:5001");
         app.UseCors();
-        app.MapControllers();
 
         app.Use(async (httpContext, next) =>
         {
-            if (!httpContext.Request.Headers.TryGetValue("API-KEY", out var apiKey)) {
-                httpContext.Response.StatusCode = 401;
-                await httpContext.Response.WriteAsync("Missing API-KEY");
-                return; 
+            var configuredApiKey = app.Configuration["API-KEY"];
+            if (string.IsNullOrWhiteSpace(configuredApiKey))
+            {
+                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                await httpContext.Response.WriteAsync("Server API-KEY is not configured.");
+                return;
             }
 
-            if (!app.Configuration["API-KEY"].Equals(apiKey)) {
-                httpContext.Response.StatusCode = 401;
+            if (!httpContext.Request.Headers.TryGetValue("API-KEY", out var apiKey) ||
+                !string.Equals(configuredApiKey, apiKey.ToString(), StringComparison.Ordinal))
+            {
+                httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 await httpContext.Response.WriteAsync("invalid API-KEY");
                 return;
             }
 
-            await next(httpContext);   
+            await next(httpContext);
         });
+
+        app.MapControllers();
         app.Run();
     }
 }
