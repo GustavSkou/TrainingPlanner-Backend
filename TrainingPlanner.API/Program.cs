@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using TrainingPlanner.Application.Contracts;
 using TrainingPlanner.Application.Services;
 using TrainingPlanner.Infrastructure.Configuration;
@@ -18,7 +19,7 @@ public partial class Program
 
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(connectionString));
+                options.UseSqlServer(connectionString));
 
         Console.WriteLine("connection string:" + connectionString);
         Console.WriteLine("API-KEY:" + builder.Configuration["API-KEY"]);
@@ -34,7 +35,11 @@ public partial class Program
         builder.Services.AddScoped<ITrainingPlanService, TrainingPlanService>();
 
         var app = builder.Build();
-        //app.Urls.Add("http://localhost:5001");
+        if (app.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
+        {
+            app.Urls.Add("http://localhost:5001");
+        }
+
         app.UseCors();
 
         app.Use(async (httpContext, next) =>
