@@ -1,10 +1,7 @@
 using TrainingPlanner.Domain.Entities;
 using TrainingPlanner.Application.DTOs;
 using TrainingPlanner.Domain.Contracts;
-
-using Microsoft.AspNetCore.Identity;
 using TrainingPlanner.Application.Contracts;
-
 
 namespace TrainingPlanner.Application.Services
 {
@@ -16,7 +13,6 @@ namespace TrainingPlanner.Application.Services
             _userRepository = userRepository;
         }
 
-
         public async Task<User> CreateUserAsync(UserDTO dto)
         {
             if (!IsUserValid(dto))
@@ -25,37 +21,26 @@ namespace TrainingPlanner.Application.Services
             if (await DoesUserExists(dto))
                 throw new Exception($"{dto} already exists in database");
 
-            string hashedpassword = HashPassword(dto);
-
-            User user = new User
-            {
+            User user = new () {
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                PasswordHash = hashedpassword,
+                LoginProvider = dto.LoginProvider,  
+                NameIdentifier = dto.NameIdentifier,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
 
-            await _userRepository.AddAsync(user);
-
-            return user;
-        }
-
-        private string HashPassword(UserDTO dto)
-        {
-            PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-            string hashedpassword = passwordHasher.HashPassword(dto, dto.Password);
-            PasswordVerificationResult verificationResult = passwordHasher.VerifyHashedPassword(dto, hashedpassword, dto.Password);
-
-            if (verificationResult != PasswordVerificationResult.Success)
-                throw new Exception("Password hashing failed");
-            return hashedpassword;
+            return await _userRepository.AddAsync(user);
         }
 
         private bool IsUserValid(UserDTO dto)
         {
-            return !string.IsNullOrEmpty(dto.FirstName) || !string.IsNullOrEmpty(dto.LastName) || !string.IsNullOrEmpty(dto.Email) || !string.IsNullOrEmpty(dto.Password);
+            return  !string.IsNullOrEmpty(dto.FirstName) || 
+                    !string.IsNullOrEmpty(dto.LastName) || 
+                    !string.IsNullOrEmpty(dto.Email) || 
+                    !string.IsNullOrEmpty(dto.NameIdentifier) || 
+                    !string.IsNullOrEmpty(dto.LoginProvider);
         }
 
         private async Task<bool> DoesUserExists(UserDTO dto)
