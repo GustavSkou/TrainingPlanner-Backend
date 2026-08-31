@@ -11,8 +11,6 @@ namespace TrainingPlanner.Infrastructure.Configuration
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            
-
             services.AddScoped<ITrainingPlanRepository, TrainingPlanRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITrainingTypeRepository, TrainingTypeRepository>();
