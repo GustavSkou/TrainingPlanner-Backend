@@ -10,7 +10,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(p =>
         p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
-var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
+var connectionString = builder.Configuration["AZURE_SQL_CONNECTIONSTRING"];
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 

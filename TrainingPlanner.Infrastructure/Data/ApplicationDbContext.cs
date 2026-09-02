@@ -28,6 +28,10 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.FirstName).IsRequired().HasMaxLength(100);
             entity.Property(e => e.LastName).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Email).IsRequired().HasMaxLength(256);
+            entity.Property(e => e.LoginProvider).HasMaxLength(100);
+            entity.Property(e => e.NameIdentifier).HasMaxLength(256);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt);
             entity.HasIndex(e => e.Email).IsUnique();
         });
 
@@ -37,6 +41,7 @@ public class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.CreatedAt).IsRequired();
 
             entity.HasData(
                 new TrainingType
@@ -71,6 +76,9 @@ public class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Date).IsRequired();
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt);
 
             entity.HasOne(e => e.User)
                 .WithMany(u => u.TrainingPlans)
@@ -89,12 +97,16 @@ public class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.DurationMinutes).IsRequired();
+            entity.Property(e => e.DistanceMeters).IsRequired();
             entity.Property(e => e.Notes).HasMaxLength(2000);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt);
 
             entity.HasOne(e => e.User)
                 .WithMany(u => u.Workouts)
                 .HasForeignKey(e => e.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             entity.HasOne(e => e.TrainingPlan)
                 .WithMany(tp => tp.Workouts)
@@ -106,6 +118,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Segment>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Order).IsRequired();
+            entity.Property(e => e.RepeatCount).IsRequired();
             entity.Property(e => e.Notes).HasMaxLength(1000);
 
             entity.HasOne(e => e.Workout)
@@ -118,7 +132,12 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Interval>(entity =>
         {
             entity.HasKey(e => e.Id);
-
+            entity.Property(e => e.Order).IsRequired();
+            entity.Property(e => e.DistanceMeters);
+            entity.Property(e => e.DurationSeconds);
+            entity.Property(e => e.TargetPaceSecondsPerKm);
+            entity.Property(e => e.TargetPaceSecondsPerKmUpperBound);
+            entity.Property(e => e.TargetPaceSecondsPerKmLowerBound);
             entity.Property(e => e.Notes).HasMaxLength(1000);
 
             entity.HasOne(e => e.Segment)

@@ -12,8 +12,8 @@ using TrainingPlanner.Infrastructure.Data;
 namespace TrainingPlanner.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260831095556_UpdatedMigration")]
-    partial class UpdatedMigration
+    [Migration("20260902085054_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,28 +163,28 @@ namespace TrainingPlanner.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 8, 30, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 9, 1, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Running"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 8, 30, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 9, 1, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Cycling"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 8, 30, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 9, 1, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Swimming"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 8, 30, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 9, 1, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Workout"
                         });
@@ -218,11 +218,13 @@ namespace TrainingPlanner.Infrastructure.Migrations
 
                     b.Property<string>("LoginProvider")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("NameIdentifier")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -335,7 +337,7 @@ namespace TrainingPlanner.Infrastructure.Migrations
                     b.HasOne("TrainingPlanner.Domain.Entities.User", "User")
                         .WithMany("Workouts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("TrainingPlan");

@@ -9,7 +9,7 @@ public sealed class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Ap
 {
     public ApplicationDbContext CreateDbContext(string[] args)
     {
-        var connectionString = BuildConfiguration(args).GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
+        var connectionString = BuildConfiguration(args)["AZURE_SQL_CONNECTIONSTRING"];
 
 
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
