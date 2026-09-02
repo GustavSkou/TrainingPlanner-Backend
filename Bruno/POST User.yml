@@ -16,7 +16,8 @@ http:
             "FirstName":"Gustav",
             "LastName":"Rasmussen",
             "Email":"Gustav@gmail.com", 
-            "Password":"270303" 
+            "LoginProvider":"",
+            "NameIdentifier":""
         }
   auth: inherit
 
