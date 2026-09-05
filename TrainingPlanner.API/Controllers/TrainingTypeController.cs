@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TrainingPlanner.Domain.Entities;
 using TrainingPlanner.Application.Contracts;
 using TrainingPlanner.Application.DTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace TrainingPlanner.API
 {
@@ -18,7 +19,14 @@ namespace TrainingPlanner.API
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetTypes()
         {
-            return Ok(await _trainingTypeService.GetTypes());
+            try
+            {
+                return Ok(await _trainingTypeService.GetTypes());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
