@@ -37,22 +37,32 @@ public class TrainingPlanController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetTrainingPlansById([FromQuery] int id)
+    public async Task<ActionResult> GetTrainingPlans([FromQuery] int? id)
     {
-        var trainingPlan = await _trainingPlanService.GetPlanById(id);
-        return Ok(trainingPlan);
+        if (id.HasValue)
+            return Ok(await _trainingPlanService.GetPlanById(id.Value));
+
+        return Ok(await _trainingPlanService.GetPlans());
     }
 
     [HttpGet("user")]
-    public async Task<ActionResult> GetTrainingPlansByUserId([FromQuery] int id)
+    public async Task<ActionResult> GetTrainingPlansByUserId([FromQuery] int userId)
     {
-        IEnumerable<TrainingPlan> trainingPlans = await _trainingPlanService.GetPlansByUserId(id);
+        IEnumerable<TrainingPlan> trainingPlans = await _trainingPlanService.GetPlansByUserId(userId);
         return Ok(trainingPlans);
     }
 
-    [HttpGet("TEST")]
-    public ActionResult<object> GetTest()
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult> UpdateTrainingPlan(int id, [FromBody] TrainingPlanDTO dto)
     {
-        return "test";
+        dto.Id = id;
+        try
+        {
+            return Ok(await _trainingPlanService.UpdateTrainingPlan(dto));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace TrainingPlanner.Application.Services
 
         public Task<IEnumerable<User>> GetUsers()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAllAsync();
         }
 
         public Task<User> GetUserById(int id)
@@ -60,7 +60,7 @@ namespace TrainingPlanner.Application.Services
 
         public Task<User> GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            return _userRepository.GetUserByEmail(email);
         }
     }
 }

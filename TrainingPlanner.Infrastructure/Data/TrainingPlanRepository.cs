@@ -20,6 +20,14 @@ namespace TrainingPlanner.Infrastructure.Data
             return plan;
         }
 
+        public async Task<IEnumerable<TrainingPlan>> GetAllAsync()
+        {
+            return await _context.TrainingPlans
+                .Include(tp => tp.TrainingType)
+                .Include(tp => tp.Workouts)
+                .ToListAsync();
+        }
+
         public async Task<TrainingPlan> GetByIdAsync(int id)
         {
             return await _context.TrainingPlans
@@ -38,8 +46,30 @@ namespace TrainingPlanner.Infrastructure.Data
                     Id = tp.TrainingType.Id,
                     Name = tp.TrainingType.Name,
                     Description = tp.TrainingType.Description
-                } : null
+                } : null,
+                Workouts = tp.Workouts.Select(w => new Workout
+                {
+                    Id = w.Id,
+                    UserId = w.UserId,
+                    TrainingPlanId = w.TrainingPlanId,
+                    Name = w.Name,
+                    Description = w.Description,
+                    DurationMinutes = w.DurationMinutes,
+                    DistanceMeters = w.DistanceMeters,
+                    Pace = w.Pace,
+                    PaceUnit = w.PaceUnit,
+                    Notes = w.Notes,
+                    CreatedAt = w.CreatedAt,
+                    UpdatedAt = w.UpdatedAt
+                }).ToList()
             }).FirstAsync();
+        }
+
+        public async Task<TrainingPlan> UpdateAsync(TrainingPlan plan)
+        {
+            _context.TrainingPlans.Update(plan);
+            await _context.SaveChangesAsync();
+            return plan;
         }
 
         public async Task<IEnumerable<TrainingPlan>> GetByUserIdAsync(int userId)
@@ -60,7 +90,22 @@ namespace TrainingPlanner.Infrastructure.Data
                     Id = tp.TrainingType.Id,
                     Name = tp.TrainingType.Name,
                     Description = tp.TrainingType.Description
-                } : null
+                } : null,
+                Workouts = tp.Workouts.Select(w => new Workout
+                {
+                    Id = w.Id,
+                    UserId = w.UserId,
+                    TrainingPlanId = w.TrainingPlanId,
+                    Name = w.Name,
+                    Description = w.Description,
+                    DurationMinutes = w.DurationMinutes,
+                    DistanceMeters = w.DistanceMeters,
+                    Pace = w.Pace,
+                    PaceUnit = w.PaceUnit,
+                    Notes = w.Notes,
+                    CreatedAt = w.CreatedAt,
+                    UpdatedAt = w.UpdatedAt
+                }).ToList()
             })
             .ToListAsync();
         }

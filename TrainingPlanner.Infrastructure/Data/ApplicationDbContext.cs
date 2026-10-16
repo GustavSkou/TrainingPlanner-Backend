@@ -99,6 +99,8 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(1000);
             entity.Property(e => e.DurationMinutes).IsRequired();
             entity.Property(e => e.DistanceMeters).IsRequired();
+            entity.Property(e => e.Pace);
+            entity.Property(e => e.PaceUnit).HasMaxLength(20);
             entity.Property(e => e.Notes).HasMaxLength(2000);
             entity.Property(e => e.CreatedAt).IsRequired();
             entity.Property(e => e.UpdatedAt);
@@ -147,4 +149,3 @@ public class ApplicationDbContext : DbContext
         });
     }
 }
-

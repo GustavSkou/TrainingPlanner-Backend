@@ -16,13 +16,15 @@ namespace TrainingPlanner.API
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<object>> GetUser([FromQuery] int[] ids)
+        public async Task<ActionResult> GetUser([FromQuery] int[]? ids, [FromQuery] string? email)
         {
-            string[] users = ["user0", "user1"];
+            if (!string.IsNullOrWhiteSpace(email))
+                return Ok(await _userService.GetUserByEmail(email));
+
             if (ids == null || ids.Length == 0)
-                return users;
-            
-            return Ok(ids.Select(id => users[id % users.Length]));
+                return Ok(await _userService.GetUsers());
+
+            return Ok(await _userService.GetUsers());
         }
 
         [HttpPost]
