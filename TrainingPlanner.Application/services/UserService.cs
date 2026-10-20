@@ -22,8 +22,7 @@ namespace TrainingPlanner.Application.Services
                 throw new Exception($"{dto} already exists in database");
 
             User user = new () {
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
+                Username = dto.Username,
                 Email = dto.Email,
                 LoginProvider = dto.LoginProvider,  
                 NameIdentifier = dto.NameIdentifier,
@@ -36,11 +35,10 @@ namespace TrainingPlanner.Application.Services
 
         private bool IsUserValid(UserDTO dto)
         {
-            return  !string.IsNullOrEmpty(dto.FirstName) || 
-                    !string.IsNullOrEmpty(dto.LastName) || 
-                    !string.IsNullOrEmpty(dto.Email) || 
-                    !string.IsNullOrEmpty(dto.NameIdentifier) || 
-                    !string.IsNullOrEmpty(dto.LoginProvider);
+            return !string.IsNullOrWhiteSpace(dto.Username) &&
+                   !string.IsNullOrWhiteSpace(dto.Email) &&
+                   !string.IsNullOrWhiteSpace(dto.NameIdentifier) &&
+                   !string.IsNullOrWhiteSpace(dto.LoginProvider);
         }
 
         private async Task<bool> DoesUserExists(UserDTO dto)

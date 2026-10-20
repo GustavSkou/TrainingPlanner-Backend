@@ -13,8 +13,7 @@ http:
     type: json
     data: |-
       {
-            "FirstName":"Gustav",
-            "LastName":"Rasmussen",
+            "Username":"Gustav Rasmussen",
             "Email":"Gustav@gmail.com", 
             "LoginProvider":"",
             "NameIdentifier":""
