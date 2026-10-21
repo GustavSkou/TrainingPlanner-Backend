@@ -10,7 +10,7 @@ namespace TrainingPlanner.Domain.Contracts
     {
         Task<TrainingPlan> AddAsync(TrainingPlan plan);
         Task<IEnumerable<TrainingPlan>> GetAllAsync();
-        Task<TrainingPlan> GetByIdAsync(int id);
+        Task<TrainingPlan?> GetByIdAsync(int id);
         Task<TrainingPlan> UpdateAsync(TrainingPlan plan);
         Task<IEnumerable<TrainingPlan>> GetByUserIdAsync(int userId);
         Task<IEnumerable<TrainingPlan>> GetByUserIdsAsync(IEnumerable<int> userIds);

@@ -5,7 +5,7 @@ namespace TrainingPlanner.Application.Contracts
 {
     public interface ITrainingPlanService
     {
-        public Task<TrainingPlan> GetPlanById(int id);
+        public Task<TrainingPlan?> GetPlanById(int id);
         public Task<IEnumerable<TrainingPlan>> GetPlans();
         public Task<IEnumerable<TrainingPlan>> GetPlansByUserId(int userId);
         public Task<TrainingPlan> CreateTrainingPlan(TrainingPlanDTO dto);

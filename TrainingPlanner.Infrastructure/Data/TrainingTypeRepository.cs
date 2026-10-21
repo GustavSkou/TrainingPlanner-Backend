@@ -25,9 +25,9 @@ namespace TrainingPlanner.Infrastructure.Data
             return await _context.TrainingTypes.ToListAsync();
         }
 
-        public async Task<TrainingType> GetByIdAsync(int id)
+        public async Task<TrainingType?> GetByIdAsync(int id)
         {
-            return await _context.TrainingTypes.FirstAsync(t => t.Id == id);
+            return await _context.TrainingTypes.FirstOrDefaultAsync(t => t.Id == id);
         }
     }
 }

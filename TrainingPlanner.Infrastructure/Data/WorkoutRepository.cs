@@ -20,9 +20,9 @@ namespace TrainingPlanner.Infrastructure.Data
             return workout;
         }
 
-        public async Task<Workout> GetByIdAsync(int id)
+        public async Task<Workout?> GetByIdAsync(int id)
         {
-            return await _context.Workouts.FirstAsync(w => w.Id == id);
+            return await _context.Workouts.FirstOrDefaultAsync(w => w.Id == id);
         }
 
         public async Task<IEnumerable<Workout>> GetByUserIdAsync(int userId)

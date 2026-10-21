@@ -16,7 +16,7 @@ namespace TrainingPlanner.Application.Services
             _trainingTypeRepository = trainingTypeRepository;
         }
 
-        public async Task<TrainingType> GetTypeById(int id)
+        public async Task<TrainingType?> GetTypeById(int id)
         {
             return await _trainingTypeRepository.GetByIdAsync(id);
         }

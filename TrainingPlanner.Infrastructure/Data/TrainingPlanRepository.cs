@@ -28,7 +28,7 @@ namespace TrainingPlanner.Infrastructure.Data
                 .ToListAsync();
         }
 
-        public async Task<TrainingPlan> GetByIdAsync(int id)
+        public async Task<TrainingPlan?> GetByIdAsync(int id)
         {
             return await _context.TrainingPlans
             .Where(tp => tp.Id == id)
@@ -62,7 +62,7 @@ namespace TrainingPlanner.Infrastructure.Data
                     CreatedAt = w.CreatedAt,
                     UpdatedAt = w.UpdatedAt
                 }).ToList()
-            }).FirstAsync();
+            }).FirstOrDefaultAsync();
         }
 
         public async Task<TrainingPlan> UpdateAsync(TrainingPlan plan)

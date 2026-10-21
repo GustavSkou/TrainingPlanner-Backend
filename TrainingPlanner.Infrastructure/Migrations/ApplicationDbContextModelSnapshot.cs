@@ -160,28 +160,28 @@ namespace TrainingPlanner.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 10, 15, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Running"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 10, 15, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Cycling"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 10, 15, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Swimming"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 10, 15, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Workout"
                         });

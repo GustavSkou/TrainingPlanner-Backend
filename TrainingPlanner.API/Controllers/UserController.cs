@@ -19,12 +19,15 @@ namespace TrainingPlanner.API
         public async Task<ActionResult> GetUser([FromQuery] int[]? ids, [FromQuery] string? email)
         {
             if (!string.IsNullOrWhiteSpace(email))
-                return Ok(await _userService.GetUserByEmail(email));
+            {
+                var user = await _userService.GetUserByEmail(email);
+                return user == null ? NotFound() : Ok(user);
+            }
 
             if (ids == null || ids.Length == 0)
                 return Ok(await _userService.GetUsers());
 
-            return Ok(await _userService.GetUsers());
+            return Ok(await _userService.GetUsersById(ids));
         }
 
         [HttpPost]

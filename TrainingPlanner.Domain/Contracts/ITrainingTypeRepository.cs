@@ -7,7 +7,7 @@ namespace TrainingPlanner.Domain.Contracts
     public interface ITrainingTypeRepository
     {
         Task<IEnumerable<TrainingType>> GetAllAsync();
-        Task<TrainingType> GetByIdAsync(int id);
+        Task<TrainingType?> GetByIdAsync(int id);
         Task<TrainingType> AddAsync(TrainingType trainingType);
     }
 }

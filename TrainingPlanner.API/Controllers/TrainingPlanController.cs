@@ -40,7 +40,10 @@ public class TrainingPlanController : ControllerBase
     public async Task<ActionResult> GetTrainingPlans([FromQuery] int? id)
     {
         if (id.HasValue)
-            return Ok(await _trainingPlanService.GetPlanById(id.Value));
+        {
+            var plan = await _trainingPlanService.GetPlanById(id.Value);
+            return plan == null ? NotFound() : Ok(plan);
+        }
 
         return Ok(await _trainingPlanService.GetPlans());
     }

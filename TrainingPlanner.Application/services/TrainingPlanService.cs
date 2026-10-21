@@ -60,6 +60,9 @@ namespace TrainingPlanner.Application.Services
                 throw new ArgumentException("Invalid training plan data.");
 
             var plan = await _trainingPlanRepository.GetByIdAsync(dto.Id.Value);
+            if (plan == null)
+                throw new KeyNotFoundException($"Training plan with id {dto.Id.Value} was not found.");
+
             plan.UserId = dto.UserId;
             plan.TrainingTypeId = dto.TrainingTypeId;
             plan.Name = dto.Name;
@@ -137,7 +140,7 @@ namespace TrainingPlanner.Application.Services
             return workout;
         }
 
-        public async Task<TrainingPlan> GetPlanById(int id)
+        public async Task<TrainingPlan?> GetPlanById(int id)
         {
             return await _trainingPlanRepository.GetByIdAsync(id);
         }

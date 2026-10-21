@@ -51,12 +51,17 @@ namespace TrainingPlanner.Application.Services
             return _userRepository.GetAllAsync();
         }
 
-        public Task<User> GetUserById(int id)
+        public Task<IEnumerable<User>> GetUsersById(IEnumerable<int> ids)
+        {
+            return _userRepository.GetUsersById(ids);
+        }
+
+        public Task<User?> GetUserById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> GetUserByEmail(string email)
+        public Task<User?> GetUserByEmail(string email)
         {
             return _userRepository.GetUserByEmail(email);
         }
