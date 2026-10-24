@@ -2,10 +2,16 @@ info:
   name: Get Types
   type: http
   seq: 3
+  description: |-
+    Lists all available training types.
+
+    Use this before creating or updating a training plan so TrainingTypeId refers
+    to an existing type. The request requires the API-KEY environment variable.
+    Returns 200 OK with an array of training types.
 
 http:
   method: GET
-  url: http://localhost:5001/types
+  url: "{{baseUrl}}/types"
   headers:
     - name: API-KEY
       value: "{{API-KEY}}"

@@ -2,57 +2,31 @@ info:
   name: POST TrainingPlan
   type: http
   seq: 4
+  description: |-
+    Creates a training plan.
+
+    UserId, TrainingTypeId, and Date are required. Get valid IDs from Get Users
+    and Get Types first. Date should be an ISO-8601 timestamp. Description is
+    optional. A Workout can optionally be included to create the plan and its
+    nested workout, segments, and intervals in one request. CreatedAt, UpdatedAt,
+    and Id are generated or ignored during creation. Returns 200 OK, or 400 Bad
+    Request when the required data is invalid.
 
 http:
   method: POST
-  url: http://localhost:5001/plans/create
+  url: "{{baseUrl}}/plans/create"
   headers:
     - name: API-KEY
       value: "{{API-KEY}}"
-  params:
-    - name: Id
-      value: ""
-      type: query
-      disabled: true
-    - name: UserId
-      value: ""
-      type: query
-      disabled: true
-    - name: TrainingTypeId
-      value: ""
-      type: query
-      disabled: true
-    - name: Name
-      value: ""
-      type: query
-      disabled: true
-    - name: Description
-      value: ""
-      type: query
-      disabled: true
-    - name: Date
-      value: ""
-      type: query
-      disabled: true
-    - name: CreatedAt
-      value: ""
-      type: query
-      disabled: true
-    - name: UpdatedAt
-      value: ""
-      type: query
-      disabled: true
   body:
     type: json
     data: |-
       {
         "userId": 1,
         "trainingTypeId": 1,
-        "name": "Loooong run",
-        "description": "Focusing on low-intensity",
-        "date": "2026-08-01T08:00:00Z",
-        "createdAt": "2026-07-31T12:00:00Z",
-        "updatedAt": null
+        "name": "Long run",
+        "description": "Focusing on low intensity",
+        "date": "2026-08-01T08:00:00Z"
       }
   auth: inherit
 

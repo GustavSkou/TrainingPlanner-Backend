@@ -2,4 +2,7 @@ name: TrainingPlanner-ENV
 variables:
   - secret: true
     name: API-KEY
-    description: ""
+    description: "API key required by the middleware for every request."
+  - name: baseUrl
+    value: "http://localhost:5001"
+    description: "Local API base URL. Change this for another environment."

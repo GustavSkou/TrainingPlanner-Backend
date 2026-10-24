@@ -2,15 +2,21 @@ info:
   name: Get TrainingPlan by user id
   type: http
   seq: 6
+  description: |-
+    Lists all training plans belonging to one user.
+
+    userId is required and must refer to the user whose plans should be returned.
+    Use GET /plans?id={id} to retrieve one plan by plan ID instead. Returns 200
+    OK with an array, including an empty array when the user has no plans.
 
 http:
   method: GET
-  url: http://localhost:5001/plans/user?id=1
+  url: "{{baseUrl}}/plans/user?userId=1"
   headers:
     - name: API-KEY
       value: "{{API-KEY}}"
   params:
-    - name: id
+    - name: userId
       value: "1"
       type: query
   auth: inherit

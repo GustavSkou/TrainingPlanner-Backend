@@ -1,0 +1,39 @@
+info:
+  name: POST Interval
+  type: http
+  seq: 10
+  description: |-
+    Creates one interval in an existing segment.
+
+    SegmentId and Order are required. Use DistanceMeters for a distance-based
+    interval and/or DurationSeconds for a time-based interval. Target pace
+    values are seconds per kilometre; use TargetPaceSecondsPerKm for an exact
+    target or the upper/lower bound fields for a range. Returns 200 OK with the
+    created interval.
+
+http:
+  method: POST
+  url: "{{baseUrl}}/intervals/create"
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
+  body:
+    type: json
+    data: |-
+      {
+        "segmentId": 1,
+        "order": 1,
+        "distanceMeters": 1000,
+        "durationSeconds": null,
+        "targetPaceSecondsPerKm": 270,
+        "targetPaceSecondsPerKmUpperBound": null,
+        "targetPaceSecondsPerKmLowerBound": null,
+        "notes": "Run evenly"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

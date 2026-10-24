@@ -1,0 +1,30 @@
+info:
+  name: GET TrainingPlans
+  type: http
+  seq: 5
+  description: |-
+    Retrieves training plans.
+
+    Leave id disabled to list all plans. Enable id and set it to a plan ID to
+    retrieve one plan. The single-plan form returns 404 Not Found when the ID
+    does not exist; the list form returns 200 OK with an array. Use Get
+    TrainingPlan by user id when filtering by user.
+
+http:
+  method: GET
+  url: "{{baseUrl}}/plans"
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
+  params:
+    - name: id
+      value: "1"
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

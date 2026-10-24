@@ -1,0 +1,57 @@
+info:
+  name: POST Workout
+  type: http
+  seq: 8
+  description: |-
+    Creates a workout and its nested segments and intervals.
+
+    UserId and TrainingPlanId must refer to existing records. DurationMinutes
+    and DistanceMeters use minutes and meters. Pace is numeric and PaceUnit
+    describes that value (for example, min/km). Each segment should have a
+    unique Order within the workout, and each interval should have an Order
+    within its segment. An interval may be distance-based, duration-based, or
+    both. CreatedAt is assigned by the API. Returns 200 OK with the created
+    workout.
+
+http:
+  method: POST
+  url: "{{baseUrl}}/workouts/create"
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
+  body:
+    type: json
+    data: |-
+      {
+        "userId": 1,
+        "trainingPlanId": 1,
+        "name": "Intervals",
+        "description": "Speed session",
+        "durationMinutes": 45,
+        "distanceMeters": 8000,
+        "pace": 4.5,
+        "paceUnit": "min/km",
+        "notes": "Warm up before the first interval",
+        "segments": [
+          {
+            "order": 1,
+            "repeatCount": 4,
+            "notes": "Main set",
+            "intervals": [
+              {
+                "order": 1,
+                "distanceMeters": 1000,
+                "targetPaceSecondsPerKm": 270,
+                "notes": "Controlled effort"
+              }
+            ]
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

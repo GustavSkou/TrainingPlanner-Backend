@@ -2,10 +2,17 @@ info:
   name: Get Users
   type: http
   seq: 1
+  description: |-
+    Retrieves users.
+
+    Remove the ids query parameter to list all users. Repeat ids to retrieve
+    selected users (for example, ?ids=1&ids=2), or replace it with email to
+    retrieve one user by email. Email takes precedence when both are supplied.
+    Returns 200 OK, or 404 Not Found when an email does not match a user.
 
 http:
   method: GET
-  url: http://localhost:5001/users?ids=1
+  url: "{{baseUrl}}/users"
   headers:
     - name: API-KEY
       value: "{{API-KEY}}"
@@ -13,6 +20,10 @@ http:
     - name: ids
       value: "1"
       type: query
+    - name: email
+      value: "gustav@example.com"
+      type: query
+      disabled: true
   auth: inherit
 
 settings:

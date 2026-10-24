@@ -1,0 +1,40 @@
+info:
+  name: PUT Workout
+  type: http
+  seq: 9
+  description: |-
+    Updates the scalar fields of an existing workout.
+
+    Set the workout ID in the URL. UserId, TrainingPlanId, name, duration, and
+    distance are sent as the complete current workout values. The endpoint
+    updates the workout itself but does not add, remove, or edit nested
+    segments and intervals. Returns 200 OK, or 404 Not Found when the ID does
+    not exist. UpdatedAt is assigned by the API.
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/workouts/1"
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
+  body:
+    type: json
+    data: |-
+      {
+        "userId": 1,
+        "trainingPlanId": 1,
+        "name": "Updated intervals",
+        "description": "Updated speed session",
+        "durationMinutes": 50,
+        "distanceMeters": 9000,
+        "pace": 4.4,
+        "paceUnit": "min/km",
+        "notes": "Updated notes"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

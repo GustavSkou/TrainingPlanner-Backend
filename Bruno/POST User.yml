@@ -2,10 +2,18 @@ info:
   name: POST User
   type: http
   seq: 2
+  description: |-
+    Creates a user.
+
+    Username, Email, LoginProvider, and NameIdentifier are all required and
+    must be non-empty. CreatedAt and UpdatedAt are assigned by the API, so they
+    should not be sent. LoginProvider identifies the authentication provider
+    (for example, github), while NameIdentifier is the provider's stable user ID.
+    Returns 201 Created, or 400 Bad Request for invalid or duplicate email data.
 
 http:
   method: POST
-  url: http://localhost:5001/users
+  url: "{{baseUrl}}/users"
   headers:
     - name: API-KEY
       value: "{{API-KEY}}"
@@ -13,11 +21,11 @@ http:
     type: json
     data: |-
       {
-            "Username":"Gustav Rasmussen",
-            "Email":"Gustav@gmail.com", 
-            "LoginProvider":"",
-            "NameIdentifier":""
-        }
+        "username": "Gustav Rasmussen",
+        "email": "gustav@example.com",
+        "loginProvider": "github",
+        "nameIdentifier": "github-user-id"
+      }
   auth: inherit
 
 settings:

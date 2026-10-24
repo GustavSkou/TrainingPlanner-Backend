@@ -1,0 +1,36 @@
+info:
+  name: PUT TrainingPlan
+  type: http
+  seq: 7
+  description: |-
+    Updates an existing training plan.
+
+    Put the plan ID in the URL. UserId, TrainingTypeId, and Date are required
+    by validation; the URL ID is applied to the body automatically, so Id in
+    the JSON body is not needed. An optional Workout updates the existing
+    workout associated with the plan. Returns 200 OK, or 400 Bad Request when
+    validation fails or the referenced plan does not exist.
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/plans/1"
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
+  body:
+    type: json
+    data: |-
+      {
+        "userId": 1,
+        "trainingTypeId": 1,
+        "name": "Updated long run",
+        "description": "Updated training plan",
+        "date": "2026-08-01T08:00:00Z"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

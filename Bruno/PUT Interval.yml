@@ -1,0 +1,38 @@
+info:
+  name: PUT Interval
+  type: http
+  seq: 11
+  description: |-
+    Updates an existing interval.
+
+    Set the interval ID in the URL and send the complete interval values.
+    SegmentId can be changed to move the interval to another segment. Pace
+    values are seconds per kilometre. Returns 200 OK, or 404 Not Found when the
+    interval ID does not exist.
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/intervals/1"
+  headers:
+    - name: API-KEY
+      value: "{{API-KEY}}"
+  body:
+    type: json
+    data: |-
+      {
+        "segmentId": 1,
+        "order": 1,
+        "distanceMeters": 1200,
+        "durationSeconds": null,
+        "targetPaceSecondsPerKm": 265,
+        "targetPaceSecondsPerKmUpperBound": 270,
+        "targetPaceSecondsPerKmLowerBound": 260,
+        "notes": "Updated target"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
