@@ -11,7 +11,7 @@ namespace TrainingPlanner.Application.DTOs
         public string? Description { get; set; }
         public DateTime Date { get; set; }
         public TrainingTypeDTO? TrainingType { get; set; }
-        public WorkoutDTO Workout { get; set; }
+        public WorkoutDTO? Workout { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
