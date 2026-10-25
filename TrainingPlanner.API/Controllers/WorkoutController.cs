@@ -20,6 +20,9 @@ public class WorkoutController : ControllerBase
     [HttpPost("create")]
     public async Task<ActionResult> Create([FromBody] WorkoutDTO dto)
     {
+        if (await _context.Workouts.AnyAsync(w => w.TrainingPlanId == dto.TrainingPlanId))
+            return Conflict($"Training plan {dto.TrainingPlanId} already has a workout.");
+
         var workout = ToEntity(dto);
         await _context.Workouts.AddAsync(workout);
         await _context.SaveChangesAsync();
@@ -35,6 +38,10 @@ public class WorkoutController : ControllerBase
             .FirstOrDefaultAsync(w => w.Id == id);
         if (workout == null)
             return NotFound();
+
+        if (await _context.Workouts.AnyAsync(w =>
+                w.TrainingPlanId == dto.TrainingPlanId && w.Id != id))
+            return Conflict($"Training plan {dto.TrainingPlanId} already has a workout.");
 
         workout.UserId = dto.UserId;
         workout.TrainingPlanId = dto.TrainingPlanId;

@@ -1,8 +1,8 @@
 name: TrainingPlanner-ENV
 variables:
+  - name: baseUrl
+    value: https://trainingplanner-backend-g4d8dagcc5cdgwgh.denmarkeast-01.azurewebsites.net
+    description: Local API base URL. Change this for another environment.
   - secret: true
     name: API-KEY
-    description: "API key required by the middleware for every request."
-  - name: baseUrl
-    value: "http://localhost:5001"
-    description: "Local API base URL. Change this for another environment."
+    description: API key required by the middleware for every request.

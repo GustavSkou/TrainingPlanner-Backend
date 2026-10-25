@@ -24,7 +24,7 @@ namespace TrainingPlanner.Infrastructure.Data
         {
             return await _context.TrainingPlans
                 .Include(tp => tp.TrainingType)
-                .Include(tp => tp.Workouts)
+                .Include(tp => tp.Workout)
                 .ToListAsync();
         }
 
@@ -47,21 +47,21 @@ namespace TrainingPlanner.Infrastructure.Data
                     Name = tp.TrainingType.Name,
                     Description = tp.TrainingType.Description
                 } : null,
-                Workouts = tp.Workouts.Select(w => new Workout
+                Workout = tp.Workout == null ? null : new Workout
                 {
-                    Id = w.Id,
-                    UserId = w.UserId,
-                    TrainingPlanId = w.TrainingPlanId,
-                    Name = w.Name,
-                    Description = w.Description,
-                    DurationMinutes = w.DurationMinutes,
-                    DistanceMeters = w.DistanceMeters,
-                    Pace = w.Pace,
-                    PaceUnit = w.PaceUnit,
-                    Notes = w.Notes,
-                    CreatedAt = w.CreatedAt,
-                    UpdatedAt = w.UpdatedAt
-                }).ToList()
+                    Id = tp.Workout.Id,
+                    UserId = tp.Workout.UserId,
+                    TrainingPlanId = tp.Workout.TrainingPlanId,
+                    Name = tp.Workout.Name,
+                    Description = tp.Workout.Description,
+                    DurationMinutes = tp.Workout.DurationMinutes,
+                    DistanceMeters = tp.Workout.DistanceMeters,
+                    Pace = tp.Workout.Pace,
+                    PaceUnit = tp.Workout.PaceUnit,
+                    Notes = tp.Workout.Notes,
+                    CreatedAt = tp.Workout.CreatedAt,
+                    UpdatedAt = tp.Workout.UpdatedAt
+                }
             }).FirstOrDefaultAsync();
         }
 
@@ -91,21 +91,21 @@ namespace TrainingPlanner.Infrastructure.Data
                     Name = tp.TrainingType.Name,
                     Description = tp.TrainingType.Description
                 } : null,
-                Workouts = tp.Workouts.Select(w => new Workout
+                Workout = tp.Workout == null ? null : new Workout
                 {
-                    Id = w.Id,
-                    UserId = w.UserId,
-                    TrainingPlanId = w.TrainingPlanId,
-                    Name = w.Name,
-                    Description = w.Description,
-                    DurationMinutes = w.DurationMinutes,
-                    DistanceMeters = w.DistanceMeters,
-                    Pace = w.Pace,
-                    PaceUnit = w.PaceUnit,
-                    Notes = w.Notes,
-                    CreatedAt = w.CreatedAt,
-                    UpdatedAt = w.UpdatedAt
-                }).ToList()
+                    Id = tp.Workout.Id,
+                    UserId = tp.Workout.UserId,
+                    TrainingPlanId = tp.Workout.TrainingPlanId,
+                    Name = tp.Workout.Name,
+                    Description = tp.Workout.Description,
+                    DurationMinutes = tp.Workout.DurationMinutes,
+                    DistanceMeters = tp.Workout.DistanceMeters,
+                    Pace = tp.Workout.Pace,
+                    PaceUnit = tp.Workout.PaceUnit,
+                    Notes = tp.Workout.Notes,
+                    CreatedAt = tp.Workout.CreatedAt,
+                    UpdatedAt = tp.Workout.UpdatedAt
+                }
             })
             .ToListAsync();
         }
@@ -128,7 +128,22 @@ namespace TrainingPlanner.Infrastructure.Data
                     Id = tp.TrainingType.Id,
                     Name = tp.TrainingType.Name,
                     Description = tp.TrainingType.Description
-                } : null
+                } : null,
+                Workout = tp.Workout == null ? null : new Workout
+                {
+                    Id = tp.Workout.Id,
+                    UserId = tp.Workout.UserId,
+                    TrainingPlanId = tp.Workout.TrainingPlanId,
+                    Name = tp.Workout.Name,
+                    Description = tp.Workout.Description,
+                    DurationMinutes = tp.Workout.DurationMinutes,
+                    DistanceMeters = tp.Workout.DistanceMeters,
+                    Pace = tp.Workout.Pace,
+                    PaceUnit = tp.Workout.PaceUnit,
+                    Notes = tp.Workout.Notes,
+                    CreatedAt = tp.Workout.CreatedAt,
+                    UpdatedAt = tp.Workout.UpdatedAt
+                }
             })
             .ToListAsync();
         }

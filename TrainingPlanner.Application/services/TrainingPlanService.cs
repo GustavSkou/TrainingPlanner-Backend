@@ -38,7 +38,7 @@ namespace TrainingPlanner.Application.Services
 
             if (dto.Workout != null)
             {
-                plan.Workouts.Add(MapWorkout(dto.Workout, plan));
+                plan.Workout = MapWorkout(dto.Workout, plan);
             }
 
             return await _trainingPlanRepository.AddAsync(plan);
@@ -72,8 +72,7 @@ namespace TrainingPlanner.Application.Services
 
             if (dto.Workout != null)
             {
-                var workout = plan.Workouts.FirstOrDefault(w => w.Id == dto.Workout.Id)
-                    ?? plan.Workouts.FirstOrDefault();
+                var workout = plan.Workout;
                 if (workout != null)
                 {
                     workout.UserId = dto.Workout.UserId;
@@ -85,6 +84,10 @@ namespace TrainingPlanner.Application.Services
                     workout.PaceUnit = dto.Workout.PaceUnit;
                     workout.Notes = dto.Workout.Notes;
                     workout.UpdatedAt = DateTime.UtcNow;
+                }
+                else
+                {
+                    plan.Workout = MapWorkout(dto.Workout, plan);
                 }
             }
 

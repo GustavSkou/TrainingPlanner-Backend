@@ -32,11 +32,11 @@ namespace TrainingPlanner.Infrastructure.Data
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Workout>> GetByTrainingPlanIdAsync(int trainingPlanId)
+        public async Task<Workout?> GetByTrainingPlanIdAsync(int trainingPlanId)
         {
             return await _context.Workouts
                 .Where(w => w.TrainingPlanId == trainingPlanId)
-                .ToListAsync();
+                .FirstOrDefaultAsync();
         }
     }
 }

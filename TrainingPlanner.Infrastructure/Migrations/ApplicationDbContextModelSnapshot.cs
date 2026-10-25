@@ -160,28 +160,28 @@ namespace TrainingPlanner.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 24, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Running"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 24, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Cycling"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 24, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Swimming"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 10, 19, 22, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 10, 24, 22, 0, 0, 0, DateTimeKind.Utc),
                             Description = "",
                             Name = "Workout"
                         });
@@ -277,7 +277,8 @@ namespace TrainingPlanner.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TrainingPlanId");
+                    b.HasIndex("TrainingPlanId")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -328,8 +329,8 @@ namespace TrainingPlanner.Infrastructure.Migrations
             modelBuilder.Entity("TrainingPlanner.Domain.Entities.Workout", b =>
                 {
                     b.HasOne("TrainingPlanner.Domain.Entities.TrainingPlan", "TrainingPlan")
-                        .WithMany("Workouts")
-                        .HasForeignKey("TrainingPlanId")
+                        .WithOne("Workout")
+                        .HasForeignKey("TrainingPlanner.Domain.Entities.Workout", "TrainingPlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -351,7 +352,7 @@ namespace TrainingPlanner.Infrastructure.Migrations
 
             modelBuilder.Entity("TrainingPlanner.Domain.Entities.TrainingPlan", b =>
                 {
-                    b.Navigation("Workouts");
+                    b.Navigation("Workout");
                 });
 
             modelBuilder.Entity("TrainingPlanner.Domain.Entities.TrainingType", b =>

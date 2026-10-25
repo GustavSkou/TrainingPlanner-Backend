@@ -15,5 +15,5 @@ public class TrainingPlan
     // Navigation properties
     public User User { get; set; } = null!;
     public TrainingType TrainingType { get; set; } = null!;
-    public ICollection<Workout> Workouts { get; set; } = new List<Workout>();
+    public Workout? Workout { get; set; }
 }

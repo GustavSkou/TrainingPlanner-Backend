@@ -110,8 +110,8 @@ public class ApplicationDbContext : DbContext
                 .OnDelete(DeleteBehavior.NoAction);
 
             entity.HasOne(e => e.TrainingPlan)
-                .WithMany(tp => tp.Workouts)
-                .HasForeignKey(e => e.TrainingPlanId)
+                .WithOne(tp => tp.Workout)
+                .HasForeignKey<Workout>(e => e.TrainingPlanId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
